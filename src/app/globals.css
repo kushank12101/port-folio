@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --noise-opacity: 0.035;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  position: relative;
+}
+
+::selection {
+  background-color: #8b6f3e;
+  color: #faf8f3;
+}
+
+/* Focus visibility for accessibility — never suppressed */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #8b6f3e;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #faf8f3;
+}
+::-webkit-scrollbar-thumb {
+  background: #ddd7c9;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b79a63;
+}
+
+.dark-scrollbar::-webkit-scrollbar-track {
+  background: #13140f;
+}
+.dark-scrollbar::-webkit-scrollbar-thumb {
+  background: #3a3b32;
+}
+
+/* Paper grain texture, subtle, applied via pseudo-element on sections that need it */
+.grain {
+  position: relative;
+}
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.font-feature-tnum {
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
